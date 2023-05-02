@@ -1,17 +1,14 @@
-
 #[derive(Debug)]
-pub struct EncryptionError {
-}
+pub struct EncryptionError {}
 
-pub fn encrypt(key: String, decrypted_message: String) -> Result<String, EncryptionError> {
+pub fn encrypt(_key: String, _decrypted_message: String) -> Result<String, EncryptionError> {
     todo!()
 }
 
 #[derive(Debug)]
-pub struct DecryptionError {
-}
+pub struct DecryptionError {}
 
-pub fn decrypt(key: String, encrypted_message: String) -> Result<String, DecryptionError> {
+pub fn decrypt(_key: String, _encrypted_message: String) -> Result<String, DecryptionError> {
     todo!()
 }
 

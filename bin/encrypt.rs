@@ -1,18 +1,18 @@
-use structopt::StructOpt;
 use std::path::PathBuf;
+use structopt::StructOpt;
 
 #[derive(StructOpt, Debug)]
 struct Opt {
     #[structopt(short, long)]
-    key: String,
+    _key: String,
 
     #[structopt(short, long)]
-    message: String,
+    _message: String,
 
     #[structopt(short, long, parse(from_os_str), default_value = "data.dat")]
-    output: PathBuf,
+    _output: PathBuf,
 }
 
 fn main() {
-    let opt = Opt::from_args();
+    let _opt = Opt::from_args();
 }
