@@ -1,18 +1,23 @@
-use std::path::PathBuf;
 use structopt::StructOpt;
 
+use symmetric_key_exercise::{
+    SimpleCipherError,
+    encrypt,
+    NONCE_LENGTH,
+    CommonEncryptionOpts,
+};
+
 #[derive(StructOpt, Debug)]
-struct Opt {
-    #[structopt(short, long)]
-    _key: String,
+struct EncryptOpt {
 
     #[structopt(short, long)]
-    _message: String,
+    message: String,
 
-    #[structopt(short, long, parse(from_os_str), default_value = "data.dat")]
-    _output: PathBuf,
+    #[structopt(flatten)]
+    shared: CommonEncryptionOpts,
 }
 
-fn main() {
-    let _opt = Opt::from_args();
+fn main() -> Result<(), SimpleCipherError> {
+    let opt = EncryptOpt::from_args();
+    Ok(())
 }
