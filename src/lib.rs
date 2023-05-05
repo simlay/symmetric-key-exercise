@@ -250,12 +250,10 @@ mod tests {
             generate_nonce: false,
             encrypted_file,
             no_nonce: false,
-            nonce: Some(nonce.clone()),
+            nonce: Some(nonce),
         };
 
-        let _ = encrypt_opts
-            .encrypt(input.clone())
-            .expect("Failed to encrypt data");
+        let _ = encrypt_opts.encrypt(input).expect("Failed to encrypt data");
         let output = decrypt_opts.decrypt();
         assert!(output.is_err());
     }
@@ -301,12 +299,10 @@ mod tests {
             encrypted_file,
             no_nonce: false,
             generate_nonce: false,
-            nonce: Some(nonce.clone()),
+            nonce: Some(nonce),
         };
 
-        let _ = encrypt_opts
-            .encrypt(input.clone())
-            .expect("Failed to encrypt data");
+        let _ = encrypt_opts.encrypt(input).expect("Failed to encrypt data");
         let decrypt_out = decrypt_opts.decrypt();
 
         assert!(decrypt_out.is_err());
