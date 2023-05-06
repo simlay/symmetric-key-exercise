@@ -371,4 +371,51 @@ mod tests {
         let output = decrypt_opts.decrypt().expect("Failed to decrypt data");
         assert_eq!(input, output);
     }
+
+    #[test]
+    fn nonce_error() {
+        let key = "baz".to_string();
+        let input = "foobar".to_string();
+
+        let tmpdir = tempfile::tempdir().expect("Failed to create tempdir");
+        let encrypted_file = tmpdir.path().join("encyrpted.dat");
+        let encrypt_opts = CommonEncryptionOpts {
+            key: key.clone(),
+            encrypted_file: encrypted_file.clone(),
+            generate_nonce: false,
+            no_nonce: false,
+            nonce: None,
+        };
+        let out = encrypt_opts.encrypt(input.clone());
+        assert!(out.is_err());
+        let out = out.unwrap_err();
+        assert_eq!(
+            format!("{out:?}"),
+            format!("{:?}", SimpleCipherError::NonceChoiceUndeteremined)
+        );
+    }
+
+    #[test]
+    fn nonce_too_long() {
+        let key = "baz".to_string();
+        let input = "foobar".to_string();
+        let nonce = vec!["a"; NONCE_LENGTH + 1].join("");
+
+        let tmpdir = tempfile::tempdir().expect("Failed to create tempdir");
+        let encrypted_file = tmpdir.path().join("encyrpted.dat");
+        let encrypt_opts = CommonEncryptionOpts {
+            key: key.clone(),
+            encrypted_file: encrypted_file.clone(),
+            generate_nonce: false,
+            no_nonce: false,
+            nonce: Some(nonce),
+        };
+        let out = encrypt_opts.encrypt(input.clone());
+        assert!(out.is_err());
+        let out = out.unwrap_err();
+        assert_eq!(
+            format!("{out:?}"),
+            format!("{:?}", SimpleCipherError::NonceTooLong(NONCE_LENGTH + 1))
+        );
+    }
 }
