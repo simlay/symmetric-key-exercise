@@ -2,9 +2,9 @@ use chacha20poly1305::{
     aead::{Aead, KeyInit},
     Error as ChachaError, Key, XChaCha20Poly1305, XNonce,
 };
+use clap::Parser;
 use rand::seq::IteratorRandom;
 use std::{fs, path::PathBuf};
-use structopt::StructOpt;
 use thiserror::Error;
 
 const MAX_KEY_LENGTH: usize = 32;
@@ -28,27 +28,27 @@ pub enum SimpleCipherError {
     NonceTooLong(usize),
 }
 
-#[derive(StructOpt, Debug)]
+#[derive(Parser, Debug)]
 pub struct CommonEncryptionOpts {
-    #[structopt(short, long)]
+    #[arg(short, long)]
     /// This is an encryption key. It must be less than 32 characters long.
     key: String,
 
-    #[structopt(short, long, parse(from_os_str), default_value = "data.dat")]
+    #[arg(short, long, default_value = "data.dat")]
     /// This is the file which an message is encrypted/decrypted to/from.
     encrypted_file: PathBuf,
 
-    #[structopt(long)]
+    #[arg(long, group = "nonce-choice", required = true)]
     /// **NOT RECOMMENDED:** This is a helper option to enable the nonce be all zeros. This results
     /// in the encrypted message be the same on every encryption and subject to a replay attacks.
     no_nonce: bool,
 
-    #[structopt(short, long)]
+    #[arg(short, long, group = "nonce-choice", required = true)]
     /// This is a flag to enable a newly generated nonce on encryption. This will error when used
     /// on decryption.
     generate_nonce: bool,
 
-    #[structopt(short, long)]
+    #[arg(short, long, group = "nonce-choice", required = true)]
     /// This is the string representation of a nonce as ascii characters up to
     /// 24 characters in length. This is required for decryption unless using
     /// the unrecommended --no-nonce feature.

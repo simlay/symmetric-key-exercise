@@ -1,15 +1,15 @@
-use structopt::StructOpt;
+use clap::Parser;
 
 use symmetric_key_exercise::CommonEncryptionOpts;
 
-#[derive(StructOpt, Debug)]
+#[derive(Parser, Debug)]
 struct DecryptOpt {
-    #[structopt(flatten)]
+    #[command(flatten)]
     shared: CommonEncryptionOpts,
 }
 
 fn main() -> anyhow::Result<()> {
-    let opt = DecryptOpt::from_args();
+    let opt = DecryptOpt::parse();
     let plaintext = opt.shared.decrypt()?;
     println!("{plaintext}");
     Ok(())
