@@ -1,6 +1,6 @@
 use structopt::StructOpt;
 
-use symmetric_key_exercise::{CommonEncryptionOpts};
+use symmetric_key_exercise::CommonEncryptionOpts;
 
 #[derive(StructOpt, Debug)]
 struct DecryptOpt {
