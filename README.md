@@ -105,28 +105,24 @@ what is this message
 
 ## Help
 ```sh
-$ cargo run --bin encrypt  -- --help
-    Finished dev [unoptimized + debuginfo] target(s) in 0.02s
+$ cargo run --bin encrypt -- --help
+    Finished dev [unoptimized + debuginfo] target(s) in 0.03s
      Running `target/debug/encrypt --help`
-symmetric-key-exercise 0.1.0
+Usage: encrypt [OPTIONS] --message <MESSAGE> --key <KEY> --no-nonce --generate-nonce --nonce <NONCE>
 
-USAGE:
-    encrypt [FLAGS] [OPTIONS] --key <key> --message <message>
-
-FLAGS:
-    -g, --generate-nonce    This is a flag to enable a newly generated nonce on encryption. This will error when used on
-                            decryption
-    -h, --help              Prints help information
-        --no-nonce          **NOT RECOMMENDED:** This is a helper option to enable the nonce be all zeros. This results
-                            in the encrypted message be the same on every encryption and subject to a replay attacks
-    -V, --version           Prints version information
-
-OPTIONS:
-    -e, --encrypted-file <encrypted-file>    This is the file which an message is encrypted/decrypted to/from [default:
-                                             data.dat]
-    -k, --key <key>                          This is an encryption key. It must be less than 32 characters long
-    -m, --message <message>
-    -n, --nonce <nonce>                      This is the string representation of a nonce as ascii characters up to 24
-                                             characters in length. This is required for decryption unless using the
-                                             unrecommended --no-nonce feature
+Options:
+  -m, --message <MESSAGE>
+          The message to be encrypted
+  -k, --key <KEY>
+          This is an encryption key. It must be less than 32 characters long
+  -e, --encrypted-file <ENCRYPTED_FILE>
+          This is the file which an message is encrypted/decrypted to/from [default: data.dat]
+      --no-nonce
+          **NOT RECOMMENDED:** This is a helper option to enable the nonce be all zeros. This results in the encrypted message be the same on every encryption and subject to a replay attacks
+  -g, --generate-nonce
+          This is a flag to enable a newly generated nonce on encryption. This will error when used on decryption
+  -n, --nonce <NONCE>
+          This is the string representation of a nonce as ascii characters up to 24 characters in length. This is required for decryption unless using the unrecommended --no-nonce feature
+  -h, --help
+          Print help
 ```
