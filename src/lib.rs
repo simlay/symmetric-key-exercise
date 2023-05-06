@@ -49,8 +49,9 @@ pub struct CommonEncryptionOpts {
     generate_nonce: bool,
 
     #[structopt(short, long)]
-    /// This is the string representation of a nonce as ascii characters. This is required for
-    /// decryption unless using the unrecommended --no-nonce feature.
+    /// This is the string representation of a nonce as ascii characters up to
+    /// 24 characters in length. This is required for decryption unless using
+    /// the unrecommended --no-nonce feature.
     nonce: Option<String>,
 }
 impl CommonEncryptionOpts {

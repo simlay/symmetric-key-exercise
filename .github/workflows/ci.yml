@@ -28,4 +28,5 @@ jobs:
         uses: codecov/codecov-action@v3
         with:
           files: lcov.info
+          token: ${{ secrets.CODECOV_TOKEN }} # the documentation says this is not required for public repos
           fail_ci_if_error: true
