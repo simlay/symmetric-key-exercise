@@ -380,13 +380,13 @@ mod tests {
         let tmpdir = tempfile::tempdir().expect("Failed to create tempdir");
         let encrypted_file = tmpdir.path().join("encyrpted.dat");
         let encrypt_opts = CommonEncryptionOpts {
-            key: key.clone(),
-            encrypted_file: encrypted_file.clone(),
+            key,
+            encrypted_file,
             generate_nonce: false,
             no_nonce: false,
             nonce: None,
         };
-        let out = encrypt_opts.encrypt(input.clone());
+        let out = encrypt_opts.encrypt(input);
         assert!(out.is_err());
         let out = out.unwrap_err();
         assert_eq!(
@@ -404,13 +404,13 @@ mod tests {
         let tmpdir = tempfile::tempdir().expect("Failed to create tempdir");
         let encrypted_file = tmpdir.path().join("encyrpted.dat");
         let encrypt_opts = CommonEncryptionOpts {
-            key: key.clone(),
-            encrypted_file: encrypted_file.clone(),
+            key,
+            encrypted_file,
             generate_nonce: false,
             no_nonce: false,
             nonce: Some(nonce),
         };
-        let out = encrypt_opts.encrypt(input.clone());
+        let out = encrypt_opts.encrypt(input);
         assert!(out.is_err());
         let out = out.unwrap_err();
         assert_eq!(
