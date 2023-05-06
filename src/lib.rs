@@ -20,13 +20,10 @@ pub enum SimpleCipherError {
     Utf8Conversion(#[from] std::string::FromUtf8Error),
     #[error("Key is {0} bytes long. Select a key that is less than 32 bytes long")]
     KeyTooLong(usize),
-
     #[error("Nonce generation not supported with decrypt")]
     NonceGenerate,
-
     #[error("Must select no-nonce, a nonce string or a generated nonce")]
     NonceChoiceUndeteremined,
-
     #[error("This nonce is {0} bytes long. Select a key that is less than 24 bytes long")]
     NonceTooLong(usize),
 }
@@ -150,8 +147,8 @@ impl CommonEncryptionOpts {
             // In this case, 26*24 input characters with selecting  24 characters and as
             // `choose_multiple` selects some without repetitions, I think the number of
             // combinations is 624 choose 24. Which has ~1.25e43 combinations, this *feels* like a
-            // sufficiently large set but the author of this nonce-subset is not a cyrptographer
-            // and would require a proper audit.
+            // sufficiently large set but the author of this nonce-subset hack is not a
+            // cyrptographer and would require a proper audit.
             let potential_nonce_chars: String = vec![
                 vec!["a"; NONCE_LENGTH].join(""),
                 vec!["b"; NONCE_LENGTH].join(""),

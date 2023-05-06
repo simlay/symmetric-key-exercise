@@ -1,6 +1,6 @@
 use structopt::StructOpt;
 
-use symmetric_key_exercise::{CommonEncryptionOpts, SimpleCipherError};
+use symmetric_key_exercise::{CommonEncryptionOpts};
 
 #[derive(StructOpt, Debug)]
 struct EncryptOpt {
@@ -11,7 +11,7 @@ struct EncryptOpt {
     shared: CommonEncryptionOpts,
 }
 
-fn main() -> Result<(), SimpleCipherError> {
+fn main() -> anyhow::Result<()> {
     let opt = EncryptOpt::from_args();
     let nonce = opt.shared.encrypt(opt.message)?;
     if let Some(nonce) = nonce {
