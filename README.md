@@ -17,3 +17,7 @@ Notes:
 - Bonus for programs written in C/C++ or Go.
 - Bonus for implementing CMAKE.
 - Bonus for creating stories with weights during development.
+
+# Implementation Notes
+
+[![codecov](https://codecov.io/gh/simlay/symmetric-key-exercise/branch/main/graph/badge.svg?token=B8BF0N27WS)](https://codecov.io/gh/simlay/symmetric-key-exercise)
