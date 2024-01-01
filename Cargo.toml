@@ -14,7 +14,7 @@ path = "bin/decrypt.rs"
 
 [dependencies]
 clap = { version = "4.4.11", features = ["derive"] }
-thiserror = "1.0.52"
+thiserror = "1.0.53"
 anyhow = "1.0"
 
 # std feature required for thiserror
